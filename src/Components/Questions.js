@@ -38,30 +38,40 @@ const Questions = () => {
             <Form >
                 <div className="form-control" >
                     {
-                        questions.map((question => {
-                            {
+                        questions.map((question => (
+                            <TextField
+                                key={question.id}
+                                id={question.id}
+                                label={question.text}
+                                name={question.type}
+                            />
+                        )))
+                    }
+                    <div>
+                        {
+                            questions.map((question => {
                                 {
-                                    switch (question.format) {
-                                        case 'text':
-                                            return <TextField
-                                                key={question.id}
-                                                id={question.id}
-                                                label={question.text}
-                                                name={question.type}
-                                            />
-                                        case 'checkbox':
-                                            return <CheckboxQuestions />;
-                                        case 'textfield':
-                                            return <TextFieldQuestions />;
-                                        default:
-                                            return null;
+                                    {
+                                        switch (question.format) {
+                                            case 'text':
+                                                return <TextQuestions
+                                                    key={question.id}
+                                                    question={question}
+                                                />
+                                            case 'checkbox':
+                                                return <CheckboxQuestions />;
+                                            case 'textfield':
+                                                return <TextFieldQuestions />;
+                                            default:
+                                                return null;
+                                        }
                                     }
                                 }
-                            }
-                        }))
-
-                    }
+                            }))
+                        }
+                    </div>
                 </div>
+
             </Form>
         </Formik >
     )

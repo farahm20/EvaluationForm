@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
-import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
+import { Formik, Form } from 'formik';
 import { Checkbox, TextField } from "@material-ui/core";
 import { FormControlLabel } from '@material-ui/core';
+import TextQuestions from './TextQuestions'
+import CheckboxQuestions from './CheckboxQuestions'
+import TextFieldQuestions from './TextFieldQuestions'
+
 
 function Render() {
     const [question, setQuestions] = useState([])
@@ -24,21 +28,6 @@ function Render() {
     return question
 }
 
-// function renderCheckboxOptions(questions) {
-//     console.log(questions);
-//     let questionOptions = [];
-
-//     questions.map((question => {
-//         questionOptions = question.options
-//         console.log("in side map", questionOptions)
-//     }
-
-//     ))
-//     console.log("out side map", questionOptions)
-//     return questionOptions;
-// }
-
-
 const Questions = () => {
     const questions = Render()
     console.log(questions)
@@ -46,21 +35,30 @@ const Questions = () => {
 
     return (
         <Formik>
-            <Form onSubmit={async (values) => {
-                console.log("Onsubmit", values);
-            }}>
+            <Form >
                 <div className="form-control" >
-
-                    {/* {typeResult ? <TextQuestions /> : <CheckboxQuestions />} */}
                     {
-                        questions.map((question => (
-                            <TextField
-                                key={question.id}
-                                id={question.id}
-                                label={question.text}
-                                name={question.type}
-                            />
-                        )))
+                        questions.map((question => {
+                            {
+                                {
+                                    switch (question.format) {
+                                        case 'text':
+                                            return <TextField
+                                                key={question.id}
+                                                id={question.id}
+                                                label={question.text}
+                                                name={question.type}
+                                            />
+                                        case 'checkbox':
+                                            return <CheckboxQuestions />;
+                                        case 'textfield':
+                                            return <TextFieldQuestions />;
+                                        default:
+                                            return null;
+                                    }
+                                }
+                            }
+                        }))
 
                     }
                 </div>

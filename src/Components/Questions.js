@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
 import { Formik, Form } from 'formik';
-import { Checkbox, TextField } from "@material-ui/core";
-import { FormControlLabel } from '@material-ui/core';
+
+// import { TextField } from "@material-ui/core";
+// import { FormControlLabel, TextareaAutosize } from '@material-ui/core';
+// import Checkbox from "@material-ui/core/Checkbox";
 import TextQuestions from './TextQuestions'
 import CheckboxQuestions from './CheckboxQuestions'
 import TextFieldQuestions from './TextFieldQuestions'
@@ -29,24 +31,19 @@ function Render() {
 }
 
 const Questions = () => {
-    const questions = Render()
-    console.log(questions)
-
+    const questions = Render();
 
     return (
-        <Formik>
+        <Formik
+            // initialValues={{
+            //     input='',
+            // }}
+            onSubmit={values => {
+                console.log("On submit: ", values)
+            }}
+        >
             <Form >
                 <div className="form-control" >
-                    {
-                        questions.map((question => (
-                            <TextField
-                                key={question.id}
-                                id={question.id}
-                                label={question.text}
-                                name={question.type}
-                            />
-                        )))
-                    }
                     <div>
                         {
                             questions.map((question => {
@@ -57,11 +54,18 @@ const Questions = () => {
                                                 return <TextQuestions
                                                     key={question.id}
                                                     question={question}
+                                                    label={question.text}
+                                                    name="input"
+                                                    type={question.format}
                                                 />
                                             case 'checkbox':
-                                                return <CheckboxQuestions />;
+                                                return <CheckboxQuestions
+                                                    key={question.id}
+                                                    question={question} />;
                                             case 'textfield':
-                                                return <TextFieldQuestions />;
+                                                return <TextFieldQuestions
+                                                    key={question.id}
+                                                    question={question} />;
                                             default:
                                                 return null;
                                         }
@@ -71,7 +75,7 @@ const Questions = () => {
                         }
                     </div>
                 </div>
-
+                <button className="button" type="submit">Submit</button>
             </Form>
         </Formik >
     )

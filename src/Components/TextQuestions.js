@@ -8,16 +8,14 @@ const TextQuestions = ({ question, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <div className="form-control">
-            <div className="form-question">
+            {/* <div className="form-question">
                 <h3 style={{ color: 'red', }}>{question.id}</h3>
                 <h3 style={{ color: 'red', }}> - </h3>
                 <h3> {question.text}</h3>
-            </div>
+            </div> */}
             <TextField
-                id={question.id}
-                name="input"
-                placeholder="Write here...."
-                className='form-control'
+                {...field}
+                {...props}
             />
             {console.log("in text questions")}
         </div>

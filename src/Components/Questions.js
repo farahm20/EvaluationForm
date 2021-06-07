@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
 import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
 // import { TextField } from "@material-ui/core";
 // import { FormControlLabel, TextareaAutosize } from '@material-ui/core';
@@ -33,11 +34,18 @@ function Render() {
 const Questions = () => {
     const questions = Render();
 
+    const validate = Yup.object({
+        input: Yup.string()
+            .max(15, 'Must be 15 characters or less')
+            .required('Required'),
+    })
+
     return (
         <Formik
-            // initialValues={{
-            //     input='',
-            // }}
+            initialValues={{
+                input: ''
+            }}
+            validationSchema={validate}
             onSubmit={values => {
                 console.log("On submit: ", values)
             }}

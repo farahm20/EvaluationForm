@@ -1,10 +1,9 @@
 import React from 'react'
 import { TextField } from "@material-ui/core";
-import { Formik, Form, useField } from 'formik';
+import { useField } from 'formik';
 
 
 const TextQuestions = ({ question, ...props }) => {
-    console.log("TextQuestion component: ", question)
     const [field, meta] = useField(props);
     return (
         <div className="form-control">
@@ -14,10 +13,13 @@ const TextQuestions = ({ question, ...props }) => {
                 <h3> {question.text}</h3>
             </div> */}
             <TextField
+                label={question.text}
+                key={question.id}
+                name={question.ans}
                 {...field}
                 {...props}
             />
-            {console.log("in text questions")}
+
         </div>
     )
 }

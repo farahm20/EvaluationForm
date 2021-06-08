@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
-import { Formik, Form } from 'formik';
+import { Formik, Form, FieldArray } from 'formik';
 import * as Yup from 'yup';
 
 // import { TextField } from "@material-ui/core";
@@ -34,22 +34,30 @@ function Render() {
 const Questions = () => {
     const questions = Render();
 
-    const validate = Yup.object({
-        input: Yup.string()
-            .max(15, 'Must be 15 characters or less')
-            .required('Required'),
-    })
+    // const validate = Yup.object({
+    //     input: Yup.string()
+    //         .max(15, 'Must be 15 characters or less')
+    //         .required('Required'),
+    // })
 
     return (
         <Formik
             initialValues={{
-                input: ''
+                answers: [
+                    {
+                        input: ""
+                    }
+                ]
             }}
-            validationSchema={validate}
+            // validationSchema={validate}
             onSubmit={values => {
                 console.log("On submit: ", values)
             }}
         >
+            {/* render={({ values }) => ( */}
+            {/* <FieldArray */}
+            {/* name="questions" */}
+            {/* render={arrayHelpers => ( */}
             <Form >
                 <div className="form-control" >
                     <div>
@@ -63,17 +71,26 @@ const Questions = () => {
                                                     key={question.id}
                                                     question={question}
                                                     label={question.text}
-                                                    name="input"
                                                     type={question.format}
+                                                    name={question.ans}
+                                                // name={'answers.push.${question.id}.input'}
+                                                // name="input"
+                                                // onChange={value => arrayHelpers.push(value)}
                                                 />
                                             case 'checkbox':
                                                 return <CheckboxQuestions
                                                     key={question.id}
-                                                    question={question} />;
+                                                    question={question}
+                                                    label={question.text}
+                                                    type={question.format}
+                                                    name={question.ans} />;
                                             case 'textfield':
                                                 return <TextFieldQuestions
                                                     key={question.id}
-                                                    question={question} />;
+                                                    question={question}
+                                                    label={question.text}
+                                                    type={question.format}
+                                                    name={question.ans} />;
                                             default:
                                                 return null;
                                         }
@@ -85,6 +102,9 @@ const Questions = () => {
                 </div>
                 <button className="button" type="submit">Submit</button>
             </Form>
+            {/* )} */}
+            {/* /> */}
+            {/* )} */}
         </Formik >
     )
 }

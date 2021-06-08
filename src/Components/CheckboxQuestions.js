@@ -1,31 +1,42 @@
 import React from 'react'
-import { Checkbox, TextField } from "@material-ui/core";
+import { Checkbox } from "@material-ui/core";
 import { FormControlLabel } from '@material-ui/core';
+import { useField } from 'formik';
 
-const CheckboxQuestions = ({ question }) => {
-    console.log("CheckboxQuestions component: ", question)
+const CheckboxQuestions = ({ question, ...props }) => {
+    const [field, meta] = useField(props);
+    // console.log(field)
     const questionOptions = question.options;
-    console.log("question Options: ", questionOptions)
+    const toggle = (event) => {
+        console.log(event.target.value)
+    };
+
     return (
         <div className="form-control">
-            <div className="form-question">
+            {/* <div className="form-question">
                 <h3 style={{ color: 'red', }}>{question.id}</h3>
                 <h3 style={{ color: 'red', }}> - </h3>
                 <h3> {question.text}</h3>
-            </div>
-            {console.log("in checkbox questions")}
+            </div> */}
             <div className="form-options">
+                <label className="form-question">{question.text}</label>
                 {
                     questionOptions.map(
                         (choice, index) => <FormControlLabel
-                            key={index}
+                            key={choice}
                             control={
                                 <Checkbox
-                                    name={choice}
+                                    // name={choice}
+                                    type="checkbox"
                                     value={choice}
+                                    name={question.ans}
+                                    // onChange={event => toggle(event)}
+                                    {...props}
                                 />
                             }
                             label={choice}
+
+                            {...field}
                         />
                     )
                 }

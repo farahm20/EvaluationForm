@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { Checkbox } from "@material-ui/core";
 import { FormControlLabel } from '@material-ui/core';
 import { useField } from 'formik';
@@ -10,6 +10,12 @@ const CheckboxQuestions = ({ question, ...props }) => {
     const toggle = (event) => {
         console.log(event.target.value)
     };
+
+    const [isChecked, setIsChecked] = useState();
+
+    const isCheckboxChecked = (index) => {
+        setIsChecked(index)
+    }
 
     return (
         <div className="form-control">
@@ -30,12 +36,13 @@ const CheckboxQuestions = ({ question, ...props }) => {
                                     type="checkbox"
                                     value={choice}
                                     name={question.ans}
-                                    // onChange={event => toggle(event)}
-                                    {...props}
+                                    checked={isChecked == index}
+                                    onClick={() => isCheckboxChecked(index)}
+                                // onChange={event => toggle(event)}
+                                // {...props}
                                 />
                             }
                             label={choice}
-
                             {...field}
                         />
                     )

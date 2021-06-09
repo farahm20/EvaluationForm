@@ -42,17 +42,18 @@ const Questions = () => {
 
     return (
         <Formik
-            initialValues={{
-                answers: [
-                    {
-                        input: ""
-                    }
-                ]
-            }}
+            initialValues={
+                {
+                    answers: [{
+                        input: { input: '' }
+                    }]
+                }}
+
             // validationSchema={validate}
             onSubmit={values => {
                 console.log("On submit: ", values)
             }}
+
         >
             {/* render={({ values }) => ( */}
             {/* <FieldArray */}
@@ -73,9 +74,6 @@ const Questions = () => {
                                                     label={question.text}
                                                     type={question.format}
                                                     name={question.ans}
-                                                // name={'answers.push.${question.id}.input'}
-                                                // name="input"
-                                                // onChange={value => arrayHelpers.push(value)}
                                                 />
                                             case 'checkbox':
                                                 return <CheckboxQuestions

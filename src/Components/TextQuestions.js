@@ -7,19 +7,16 @@ const TextQuestions = ({ question, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <div className="form-control">
-            {/* <div className="form-question">
-                <h3 style={{ color: 'red', }}>{question.id}</h3>
-                <h3 style={{ color: 'red', }}> - </h3>
-                <h3> {question.text}</h3>
-            </div> */}
-            <TextField
-                label={question.text}
-                key={question.id}
-                name={question.ans}
-                {...field}
-                {...props}
-            />
+            <div className="form-question">
 
+                <TextField
+                    label={question.text}
+                    key={question.id}
+                    name={question.ans}
+                    {...field}
+                    {...props}
+                />
+            </div>
         </div>
     )
 }

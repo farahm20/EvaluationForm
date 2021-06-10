@@ -19,20 +19,16 @@ const CheckboxQuestions = ({ question, ...props }) => {
 
     return (
         <div className="form-control">
-            {/* <div className="form-question">
-                <h3 style={{ color: 'red', }}>{question.id}</h3>
-                <h3 style={{ color: 'red', }}> - </h3>
-                <h3> {question.text}</h3>
-            </div> */}
-            <div className="form-options">
-                <label className="form-question">{question.text}</label>
+
+            <div className="form-question">
+                <label >{question.text}</label>
                 {
                     questionOptions.map(
                         (choice, index) => <FormControlLabel
                             key={choice}
                             control={
                                 <Checkbox
-                                    // name={choice}
+                                    className="form-options"
                                     type="checkbox"
                                     value={choice}
                                     name={question.ans}

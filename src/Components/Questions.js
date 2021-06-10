@@ -10,6 +10,31 @@ import TextQuestions from './TextQuestions'
 import CheckboxQuestions from './CheckboxQuestions'
 import TextFieldQuestions from './TextFieldQuestions'
 
+// firebase.firestore().collection('TestingQuestions').add({
+//     flag: false,
+//     format: "textfield",
+//     id: 24,
+//     text: "Is there anything you think we missed asking you in the form, in relation to your personal preferences and needs, to be able to match you correctly?",
+//     type: 'text'
+// })
+
+// firebase.firestore().collection('TestingQuestions').add({
+//     flag: true,
+//     format: "checkbox",
+//     id: 14,
+//     options: [1, 2, 3, 4, 5],
+//     text: "How well do you think your therapist matches your preferences and needs - described in the form you completed?",
+//     type: 'numericalScale'
+// })
+
+// firebase.firestore().collection('TestingQuestions').add({
+//     flag: true,
+//     format: "checkbox",
+//     id: 20,
+//     options: ["Less than two months", "More than two months, less than six months", "For about 6-12 months", "For about 12-24 months", "More than 24 months"],
+//     text: "Before contacting us, how long had you been thinking about seeing a therapist?",
+//     type: 'multipleChoice'
+// })
 
 function Render() {
     const [question, setQuestions] = useState([])

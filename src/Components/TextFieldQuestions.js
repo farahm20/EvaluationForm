@@ -7,17 +7,17 @@ const TextFieldQuestions = ({ question, ...props }) => {
     return (
         <div>
             <div className="form-control">
-                {/* <h3 style={{ color: 'red', }}>{question.id}</h3>
-                <h3 style={{ color: 'red', }}> - </h3>
-                <h3> {question.text}</h3> */}
-                <TextField
-                    label={question.text}
-                    multiline
-                    rowsMax={4}
-                    name={question.ans}
-                    {...field}
-                    {...props}
-                />
+                <div className="form-question">
+
+                    <TextField
+                        label={question.text}
+                        multiline
+                        rowsMax={8}
+                        name={question.ans}
+                        {...field}
+                        {...props}
+                    />
+                </div>
             </div>
         </div>
     )
